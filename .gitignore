@@ -1,0 +1,20 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Excel lock files
+~$*.xlsx
+~$*.xlsb
+~$*.xls
+
+# Working data files (contain real names/emails/client data - keep local only)
+Distribution_list.xlsx
+Distribution_list_1.xlsx
+Mapping.xlsx
+Incoming Vs Sent.xlsb
+
+# Claude Code runtime state
+.claude/*.lock
