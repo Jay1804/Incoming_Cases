@@ -5,16 +5,14 @@
 __pycache__/
 *.pyc
 
-# Excel lock files
-~$*.xlsx
-~$*.xlsb
-~$*.xls
+# Excel files: working/reference data containing real names, emails and client
+# data - keep local only. Covers Distribution_list.xlsx, reference reports, etc.
+*.xlsx
+*.xlsb
+*.xls
+~$*
 
-# Working data files (contain real names/emails/client data - keep local only)
-Distribution_list.xlsx
-Distribution_list_1.xlsx
-Mapping.xlsx
-Incoming Vs Sent.xlsb
-
-# Claude Code runtime state
+# Claude Code / Playwright local state
 .claude/*.lock
+.claude/settings.local.json
+.playwright-mcp/

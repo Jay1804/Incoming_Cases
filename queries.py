@@ -61,18 +61,26 @@ GROUP BY
 """
 
 
+def _exclude_test_clients(df, name_col):
+    """Drop rows whose client name looks like a test/dummy account (case-insensitive)."""
+    is_test = df[name_col].astype(str).str.contains(r"test|dummy", case=False, na=False, regex=True)
+    return df[~is_test].reset_index(drop=True)
+
+
 def fetch_incoming_case_count(start_date, end_date):
-    return pd.read_sql(
+    df = pd.read_sql(
         INCOMING_CASE_COUNT_SQL,
         get_engine(),
         params={"start_date": start_date, "end_date": end_date},
     )
+    return _exclude_test_clients(df, "Client")
 
 
 def fetch_sent_case(start_date, end_date):
     end_date_exclusive = end_date + datetime.timedelta(days=1)
-    return pd.read_sql(
+    df = pd.read_sql(
         SENT_CASE_SQL,
         get_engine(),
         params={"start_date": start_date, "end_date_exclusive": end_date_exclusive},
     )
+    return _exclude_test_clients(df, "Client_name")
